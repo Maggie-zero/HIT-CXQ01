@@ -24,26 +24,26 @@ export default [
   },
   // 生产模式示例
   {
-    path: '/home1',
+    path: '/img',
     component: Layout,
-    name: 'home1',
+    name: 'img',
     meta: {
       level: 0,
       type: "Production",
       isSideBar: true,
-      title: '演示系统',
+      title: '图像分析',
       icon: 'Iphone'
     },
-    redirect: { path: '/home1' },
+    redirect: { path: '/imgProcess' },
     children: [
       {
-        path: '/home1',
+        path: '/imgProcess',
         meta: {
           level: 1,
-          title: '建模',
+          title: '图像处理',
           icon: 'stopwatch'
         },
-        component: () => import('@/view/product/spatialModel/index.vue')
+        component: () => import('@/view/product/imgProcess/index.vue')
       },
       {
         path: '/home2',

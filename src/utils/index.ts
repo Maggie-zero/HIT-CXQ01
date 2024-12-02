@@ -16,3 +16,8 @@ export * from './usage/nporgress' //进度条加载、剪贴板
 export * from './usage/crypto' //进度条加载、剪贴板
 export { zhCn } from './usage/zh-cn' //moment中文
 
+
+// 人工智能模型
+export { TfModel, tfModels } from './add/tfModel'
+export { Unit8 } from './add/unit8' //图像处理
+export { fileCheck } from './add/check' //图像处理
