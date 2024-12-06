@@ -1,17 +1,8 @@
 <template>
   <div class="relative h-full w-full">
-    <div
-      id="pane"
-      class="absolute top-2 left-2 w-1/5 z-10"
-    ></div>
-    <div
-      id="cesiumContainer"
-      class="absolute top-0 left-0 w-full h-full"
-    ></div>
-    <canvas
-      id="colorRamp"
-      class="absolute bottom-10 left-10 h-6 w-32"
-    ></canvas>
+    <div id="pane" class="absolute top-2 left-2 w-1/5 z-10"></div>
+    <div id="cesiumContainer" class="absolute top-0 left-0 w-full h-full"></div>
+    <canvas id="colorRamp" class="absolute bottom-10 left-10 h-6 w-32"></canvas>
   </div>
 </template>
 
@@ -28,7 +19,7 @@ const maxHeight = 2000.0;
 const countourLineSpacing = 500.0;
 
 const range = maxHeight - minHeight;
-const d = (height) => (height - minHeight) / range;
+const d = height => (height - minHeight) / range;
 
 Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYzIzM2MwNy05OTAzLTQ4NjUtYmFjZC0wOWVjYThjODM5ZDIiLCJpZCI6MTgyNjEyLCJpYXQiOjE3MDE3NzU4OTR9.dRcHqDW6fURu70xEFTdvwBvAN4JU5-RFSrPHzYwt9IA";
@@ -37,7 +28,7 @@ const state = reactive({
   entity: {} as any,
 
   pane: {} as any,
-  para: {} as any,
+  para: {} as any
 });
 
 const myAction = async () => {
@@ -51,11 +42,11 @@ const myAction = async () => {
   globe.maximumScreenSpaceError = 1.0;
   globe.enableLighting = true;
   scene.light = new Cesium.DirectionalLight({
-    direction: new Cesium.Cartesian3(1, 0, 0), // Updated every frame
+    direction: new Cesium.Cartesian3(1, 0, 0) // Updated every frame
   });
   const cameraMaxHeight = globe.ellipsoid.maximumRadius * 2;
   const scratchNormal = new Cesium.Cartesian3();
-  scene.preRender.addEventListener(function (scene, time) {
+  scene.preRender.addEventListener(function(scene, time) {
     const surfaceNormal = globe.ellipsoid.geodeticSurfaceNormal(
       camera.positionWC,
       scratchNormal
@@ -183,19 +174,19 @@ function getElevationContourMaterial() {
       type: "ElevationColorContour",
       materials: {
         contourMaterial: {
-          type: "ElevationContour",
+          type: "ElevationContour"
         },
         elevationRampMaterial: {
-          type: "ElevationRamp",
-        },
+          type: "ElevationRamp"
+        }
       },
       components: {
         diffuse:
           "(1.0 - contourMaterial.alpha) * elevationRampMaterial.diffuse + contourMaterial.alpha * contourMaterial.diffuse",
-        alpha: "max(contourMaterial.alpha, elevationRampMaterial.alpha)",
-      },
+        alpha: "max(contourMaterial.alpha, elevationRampMaterial.alpha)"
+      }
     },
-    translucent: false,
+    translucent: false
   });
 }
 
@@ -214,7 +205,7 @@ const cesiInit = async () => {
     navigationHelpButton: false, //帮助提示组件
     selectionIndicator: false, //选取指示器组件
     navigationInstructionsInitiallyVisible: false, //导航说明
-    mapProjection: new Cesium.WebMercatorProjection(),
+    mapProjection: new Cesium.WebMercatorProjection()
   };
   const arcGisImagery = Cesium.ArcGisMapServerImageryProvider.fromUrl(
     "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
@@ -229,8 +220,8 @@ const cesiInit = async () => {
     contextOptions: {
       webgl: {
         // alpha: true,
-      },
-    },
+      }
+    }
   });
   state.viewer.scene.skyBox.show = false;
   state.viewer.scene.backgroundColor = new Cesium.Color(0, 0, 0, 0);
@@ -243,7 +234,7 @@ const paneInit = (para: any) => {
   state.pane = new Pane({
     container: document.getElementById("pane") as any,
     title: "参数设置",
-    expanded: true,
+    expanded: true
   });
   para
     .filter((item: any) => item.type == "binding")
@@ -252,7 +243,7 @@ const paneInit = (para: any) => {
         .addBinding(state.para, item.name, {
           min: item.min,
           max: item.max,
-          label: item.label,
+          label: item.label
         })
         .on("change", (ev: any) => {
           item.func && item.func(state.viewer, ev);
@@ -262,7 +253,7 @@ const paneInit = (para: any) => {
 
   const btn = state.pane.addButton({
     title: "确认",
-    label: "回到初始", // optional
+    label: "回到初始" // optional
   });
   btn.on("click", () => {
     para.forEach((item: any) => {
@@ -284,7 +275,7 @@ onMounted(async () => {
   // });
 });
 onBeforeUnmount(() => {
-  Object.keys(state).forEach((el) => delete state[el]);
+  Object.keys(state).forEach(el => delete state[el]);
 });
 </script>
 

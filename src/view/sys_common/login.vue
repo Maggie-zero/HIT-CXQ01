@@ -17,7 +17,7 @@
       "
     >
       <div class="w-full h-100">
-        <h1 class="text-xl md:text-5xl font-bold leading-tight mt-2">AI+城市规划建设系统平台</h1>
+        <h1 class="text-xl md:text-5xl font-bold leading-tight mt-2">AI+电化学储能系统平台</h1>
 
         <el-form class="mt-6" ref="form" :rules="rules" :model="formInline">
           <el-form-item prop="username">
@@ -98,7 +98,7 @@
             >Create an account</a>
           </p>
 
-          <p class="text-sm text-gray-500 mt-12">&copy;2024 吴松涛团队 MYing实验室</p>
+          <p class="text-sm text-gray-500 mt-12">&copy;2024 程新群团队 MYing实验室</p>
         </el-form>
       </div>
     </div>

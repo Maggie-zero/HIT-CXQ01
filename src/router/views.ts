@@ -45,15 +45,15 @@ export default [
         },
         component: () => import('@/view/product/imgProcess/index.vue')
       },
-      // {
-      //   path: '/home2',
-      //   meta: {
-      //     level: 1,
-      //     title: '监控',
-      //     icon: 'stopwatch'
-      //   },
-      //   component: () => import('@/view/sys_common/intro.vue')
-      // },
+      {
+        path: '/home1',
+        meta: {
+          level: 1,
+          title: '建模',
+          icon: 'stopwatch'
+        },
+        component: () => import('@/view/product/spatialModel/index.vue')
+      },
     ]
   },
   // 科研模式示例
